@@ -1,5 +1,3 @@
-package test;
-
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.hardware.RandomObscureMotor;
 import frc.robot.subsystems.Elevator;
@@ -18,7 +16,7 @@ public class ElevatorTest {
     private double doorMotorPower = 0;
 
     @Before
-    void setUp() {
+    public void setUp() {
         mockMovingMotor = mock(RandomObscureMotor.class);
         mockDoorMotor = mock(RandomObscureMotor.class);
         elevator = new Elevator(mockMovingMotor, mockDoorMotor);
@@ -54,7 +52,7 @@ public class ElevatorTest {
     }
 
     @Test
-    void TestGoUp() {
+    public void TestGoUp() {
         elevator.setWantedState(Elevator.WantedElevatorState.WANTS_TO_GO_UP);
         elevator.update();
         elevator.update();
@@ -63,7 +61,7 @@ public class ElevatorTest {
     }
 
     @Test
-    void TestGoDown() {
+    public void TestGoDown() {
         elevator.setWantedState(Elevator.WantedElevatorState.WANTS_TO_GO_DOWN);
         elevator.update();
         elevator.update();
@@ -71,7 +69,7 @@ public class ElevatorTest {
     }
 
     @Test
-    void TestOpenDoor() {
+    public void TestOpenDoor() {
         elevator.setWantedState(Elevator.WantedElevatorState.WANTS_TO_OPEN_DOORS);
         elevator.update();
         elevator.update();
@@ -79,7 +77,7 @@ public class ElevatorTest {
     }
 
     @Test
-    void TestIdle() {
+    public void TestIdle() {
         elevator.setWantedState(Elevator.WantedElevatorState.WANTS_TO_GO_UP);
         elevator.update();
         elevator.update();

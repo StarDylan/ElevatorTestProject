@@ -62,11 +62,22 @@ public class Elevator {
 
         ElevatorState newState;
 
-        newState = switch(elevatorState){
-            case GOING_UP   -> handleGoUp();
-            case GOING_DOWN -> handleGoDown();
-            case DOORS_OPEN -> handleDoorOpen();
-            case IDLE       -> handleIdle();
+        switch(elevatorState){
+            case GOING_UP:
+                newState = handleGoUp();
+                break;
+            case GOING_DOWN:
+                newState = handleGoDown();
+                break;
+            case DOORS_OPEN:
+                newState = handleDoorOpen();
+                break;
+            case IDLE:
+                newState = handleIdle();
+                break;
+            default:
+                newState = handleIdle();
+                logger.severe("Default Case Statement! STATE: " + elevatorState.toString());
         };
 
         elevatorState = newState;
@@ -103,11 +114,17 @@ public class Elevator {
 
 
     private ElevatorState defaultStateTransfer(){
-        return switch(this.wantedElevatorState){
-            case WANTS_TO_GO_UP      -> ElevatorState.GOING_UP;
-            case WANTS_TO_GO_DOWN    -> ElevatorState.GOING_DOWN;
-            case WANTS_TO_OPEN_DOORS -> ElevatorState.DOORS_OPEN;
-            case WANTS_TO_IDLE       -> ElevatorState.IDLE;
-        };
+        switch (this.wantedElevatorState) {
+            case WANTS_TO_GO_UP:
+                return ElevatorState.GOING_UP;
+            case WANTS_TO_GO_DOWN:
+                return ElevatorState.GOING_DOWN;
+            case WANTS_TO_OPEN_DOORS:
+                return ElevatorState.DOORS_OPEN;
+            case WANTS_TO_IDLE:
+                return ElevatorState.IDLE;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 }
